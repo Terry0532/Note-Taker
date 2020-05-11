@@ -13,8 +13,8 @@ module.exports = function (app) {
         newNotes.push(req.body);
         fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(newNotes), err => {
             if (err) throw err;
-            res.send(200);
         });
+        res.sendStatus(200);
     });
     app.delete("/api/notes/:id", function (req, res) {
         const notes = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/db.json")));
@@ -22,7 +22,7 @@ module.exports = function (app) {
         notes.splice(notes.indexOf(noteToDelete), 1);
         fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(notes), err => {
             if (err) throw err;
-            res.send(200);
         });
+        res.sendStatus(200);
     });
 };
